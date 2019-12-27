@@ -1,0 +1,44 @@
+group 'pi-individual'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    javaMainClass = "pi.individual.MainApplication"
+}
+
+bootJar {
+    baseName = 'pi-individual'
+    version =  '1.0.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("junit:junit")
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+    }
+}
+
+task startService(type: Exec) {
+    dependsOn build
+    group = "Execution"
+    description = "Run the App"
+    commandLine "java", "-classpath", sourceSets.main.runtimeClasspath.getAsPath(), "pi.individual.MainApplication"
+}

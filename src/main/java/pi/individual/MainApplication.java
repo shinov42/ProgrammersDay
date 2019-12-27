@@ -1,0 +1,23 @@
+package pi.individual;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@SpringBootApplication
+@ComponentScan
+@Configuration
+public class MainApplication extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        application.profiles("production");
+        return application.sources(MainApplication.class);
+    }
+}
